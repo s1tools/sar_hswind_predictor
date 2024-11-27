@@ -7,7 +7,7 @@ with open('README.md', 'r') as f:
     readme = f.read()
 
 with open('VERSION.txt', 'r') as f:
-    version = f.readline()[:-1]
+    version = f.read()
 
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
