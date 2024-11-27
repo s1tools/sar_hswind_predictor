@@ -1,0 +1,2 @@
+/home/abenchaabane/pyve/env_infer_hswind_mpc/src/test/referencedata/S1A_WV_OCN__2SSV_20231122T063708_20231122T065756_051326_063161_3DF2.SAFE/measurement/s1a-wv1-ocn-vv-20231122t071316-20231122t071319-051326-063162-031.nc
+/home/abenchaabane/pyve/env_infer_hswind_mpc/src/test/referencedata/S1A_WV_OCN__2SSV_20231122T063708_20231122T065756_051326_063161_3DF2.SAFE/measurement/s1a-wv2-ocn-vv-20231122t065103-20231122t065106-051326-063161-058.nc

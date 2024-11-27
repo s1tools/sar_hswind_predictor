@@ -1,0 +1,29 @@
+# created by virtualenv automatically
+*.whl
+lib/*.tar.gz
+*.py[co]
+*.rst
+*.*~
+*.orig
+.idea
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+.log
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+/cots/

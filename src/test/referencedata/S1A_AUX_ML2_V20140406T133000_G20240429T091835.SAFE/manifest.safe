@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xfdu:XFDU xmlns:s1auxsar="http://www.esa.int/safe/sentinel-1.0/sentinel-1/auxiliary/sar" xmlns:safe="http://www.esa.int/safe/sentinel-1.0" xmlns:xfdu="urn:ccsds:schema:xfdu:1" version="esa/safe/sentinel-1.0/sentinel-1/auxiliary/sar/scs">
+  <informationPackageMap>
+    <xfdu:contentUnit dmdID="platform generalProductInformation" pdiID="processing" textInfo="Sentinel-1 L2 Auxilary Machine Learning models for L2 processor" unitType="SAFE Archive Information Package Map">
+     <xfdu:contentUnit repID="auxSchema" unitType="Measurement Data Unit">
+        <dataObjectPointer dataObjectID="s1a-aux-ml2" />
+      </xfdu:contentUnit>
+      <xfdu:contentUnit repID="auxSchema" unitType="Measurement Data Unit">
+        <dataObjectPointer dataObjectID="s1a-wv-heteroskedastic-g20170101" />
+      </xfdu:contentUnit>
+      <xfdu:contentUnit repID="auxSchema" unitType="Measurement Data Unit">
+        <dataObjectPointer dataObjectID="s1a-wv1-phi-best-model-g20230101" />
+      </xfdu:contentUnit>
+      <xfdu:contentUnit repID="auxSchema" unitType="Measurement Data Unit">
+        <dataObjectPointer dataObjectID="s1a-wv-thresholds4QF-regression-model-g20230101" />
+      </xfdu:contentUnit>
+      <xfdu:contentUnit repID="auxSchema" unitType="Measurement Data Unit">
+        <dataObjectPointer dataObjectID="s1a-wv2-wl-best-model-g20230101" />
+      </xfdu:contentUnit>
+      <xfdu:contentUnit repID="auxSchema" unitType="Measurement Data Unit">
+        <dataObjectPointer dataObjectID="s1a-wv2-phi-best-model-g20230101" />
+      </xfdu:contentUnit>
+      <xfdu:contentUnit repID="auxSchema" unitType="Measurement Data Unit">
+        <dataObjectPointer dataObjectID="s1a-wv2-hs-best-model-g20230101" />
+      </xfdu:contentUnit>
+      <xfdu:contentUnit repID="auxSchema" unitType="Measurement Data Unit">
+        <dataObjectPointer dataObjectID="s1a-wv1-wl-best-model-g20230101" />
+      </xfdu:contentUnit>
+      <xfdu:contentUnit repID="auxSchema" unitType="Measurement Data Unit">
+        <dataObjectPointer dataObjectID="s1a-wv1-hs-best-model-g20230101" />
+      </xfdu:contentUnit>
+    </xfdu:contentUnit>
+  </informationPackageMap>
+  <metadataSection>
+    <metadataObject ID="processing" category="PDI" classification="PROVENANCE">
+      <metadataWrap mimeType="text/xml" textInfo="Processing" vocabularyName="SAFE">
+        <xmlData>
+          <safe:processing name="AUX_ML2 Generation" start="2024-04-29T09:18:35.000000" stop="2024-04-29T09:18:35.000000">
+            <safe:facility country="France" name="Copernicus S1 Core Ground Segment - MPC" organisation="ESA" site="CLS-Brest" />
+          </safe:processing>
+        </xmlData>
+      </metadataWrap>
+    </metadataObject>
+    <metadataObject ID="platform" category="DMD" classification="DESCRIPTION">
+      <metadataWrap mimeType="text/xml" textInfo="Platform Description" vocabularyName="SAFE">
+        <xmlData>
+          <safe:platform>
+            <safe:nssdcIdentifier>2014-016A</safe:nssdcIdentifier>
+            <safe:familyName>SENTINEL-1</safe:familyName>
+            <safe:number>A</safe:number>
+            <safe:instrument>
+              <safe:familyName abbreviation="SAR">Synthetic Aperture Radar</safe:familyName>
+            </safe:instrument>
+          </safe:platform>
+        </xmlData>
+      </metadataWrap>
+    </metadataObject>
+    <metadataObject ID="standAloneProductInformation" category="DMD" classification="DESCRIPTION">
+      <metadataWrap mimeType="text/xml" textInfo="Stand Alone Product Information" vocabularyName="SAFE">
+        <xmlData>
+          <s1auxsar:standAloneProductInformation>
+            <s1auxsar:auxProductType>AUX_ML2</s1auxsar:auxProductType>
+            <s1auxsar:validity>2014-04-06T13:30:00.000000</s1auxsar:validity>
+            <s1auxsar:generation>2024-04-29T09:18:35.000000</s1auxsar:generation>
+            <s1auxsar:instrumentConfigurationId>1</s1auxsar:instrumentConfigurationId>
+            <s1auxsar:changeDescription><![CDATA[Description:
+
+New auxiliary data file processor containing Machine Learning Models used by the Sentinel-1 Level 2 processor (IPF)
+
+This auxiliary file is only used by S1 IPF >= 003.80 (not considered by older versions).
+
+Reference: 
+RDBADF-140]]></s1auxsar:changeDescription>
+          </s1auxsar:standAloneProductInformation>
+        </xmlData>
+      </metadataWrap>
+    </metadataObject>
+    <metadataObject ID="auxSchema" category="REP" classification="SYNTAX">
+      <metadataReference href="./support/s1-aux-ml2.xsd" locatorType="URL" mimeType="text/xml" />
+    </metadataObject>
+    <metadataObject ID="wv2NcInformation" category="REP" classification="SYNTAX">
+      <metadataReference href="./support/test/ths-models/s1a-wv2-ocn-vv-20210201t083307-20210201t083310-036394-044589-004.nc" locatorType="URL" mimeType="text/xml" />
+    </metadataObject>
+    <metadataObject ID="thsPyInformation" category="REP" classification="SYNTAX">
+      <metadataReference href="./support/test/ths-models/test_ipf503.py" locatorType="URL" mimeType="application/octet-stream" />
+    </metadataObject>
+    <metadataObject ID="wv1NcInformation" category="REP" classification="SYNTAX">
+      <metadataReference href="./support/test/ths-models/s1a-wv1-ocn-vv-20190515t001333-20190515t001336-016247-01e941-001.nc" locatorType="URL" mimeType="application/octet-stream" />
+    </metadataObject>
+    <metadataObject ID="qfPyInformation" category="REP" classification="SYNTAX">
+      <metadataReference href="./support/test/qf-models/test_ipf520.py" locatorType="URL" mimeType="application/octet-stream" />
+    </metadataObject>
+    <metadataObject ID="npyInformation" category="REP" classification="SYNTAX">
+      <metadataReference href="./support/test/qf-models/test_ipf520.npy" locatorType="URL" mimeType="application/octet-stream" />
+    </metadataObject>
+  </metadataSection>
+  <dataObjectSection>
+    <dataObject ID="s1a-aux-ml2" repID="auxSchema">
+      <byteStream mimeType="application/json" size="712">
+        <fileLocation href="./data/s1a-aux-ml2.json" locatorType="URL" />
+        <checksum checksumName="MD5">0a6c433963b0dad101335b8e69bca2eb</checksum>
+      </byteStream>
+    </dataObject>
+    <dataObject ID="s1a-wv-heteroskedastic-g20170101" repID="auxSchema">
+      <byteStream mimeType="application/x-hdf5" size="16569512">
+        <fileLocation href="./data/ths-models/s1a-wv-heteroskedastic-g20170101.h5" locatorType="URL" />
+        <checksum checksumName="MD5">e948927ea11d9e57615a88c31f49eb80</checksum>
+      </byteStream>
+    </dataObject>
+    <dataObject ID="s1a-wv1-phi-best-model-g20230101" repID="auxSchema">
+      <byteStream mimeType="application/ubjson" size="43582976">
+        <fileLocation href="./data/qf-models/s1a-wv1-phi-best-model-g20230101.ubj" locatorType="URL" />
+        <checksum checksumName="MD5">c5f734ca765a920a64549878312f870a</checksum>
+      </byteStream>
+    </dataObject>
+    <dataObject ID="s1a-wv-thresholds4QF-regression-model-g20230101" repID="auxSchema">
+      <byteStream mimeType="application/octet-stream" size="263">
+        <fileLocation href="./data/qf-models/s1a-wv-thresholds4QF-regression-model-g20230101.pkl" locatorType="URL" />
+        <checksum checksumName="MD5">9534dda91fd31a8215d76cb6e5ca0de4</checksum>
+      </byteStream>
+    </dataObject>
+    <dataObject ID="s1a-wv2-wl-best-model-g20230101" repID="auxSchema">
+      <byteStream mimeType="application/ubjson" size="24057920">
+        <fileLocation href="./data/qf-models/s1a-wv2-wl-best-model-g20230101.ubj" locatorType="URL" />
+        <checksum checksumName="MD5">5772a5ea23f4431b10240b283aaf9364</checksum>
+      </byteStream>
+    </dataObject>
+    <dataObject ID="s1a-wv2-phi-best-model-g20230101" repID="auxSchema">
+      <byteStream mimeType="application/ubjson" size="44607968">
+        <fileLocation href="./data/qf-models/s1a-wv2-phi-best-model-g20230101.ubj" locatorType="URL" />
+        <checksum checksumName="MD5">8f505904b40c308c020a7018ebf4dba0</checksum>
+      </byteStream>
+    </dataObject>
+    <dataObject ID="s1a-wv2-hs-best-model-g20230101" repID="auxSchema">
+      <byteStream mimeType="application/ubjson" size="15405104">
+        <fileLocation href="./data/qf-models/s1a-wv2-hs-best-model-g20230101.ubj" locatorType="URL" />
+        <checksum checksumName="MD5">760eb1b8d826cfe55b5c514b078304e8</checksum>
+      </byteStream>
+    </dataObject>
+    <dataObject ID="s1a-wv1-wl-best-model-g20230101" repID="auxSchema">
+      <byteStream mimeType="application/ubjson" size="23411001">
+        <fileLocation href="./data/qf-models/s1a-wv1-wl-best-model-g20230101.ubj" locatorType="URL" />
+        <checksum checksumName="MD5">f9a8fa87590ecd89b96b8111acb581cc</checksum>
+      </byteStream>
+    </dataObject>
+    <dataObject ID="s1a-wv1-hs-best-model-g20230101" repID="auxSchema">
+      <byteStream mimeType="application/ubjson" size="15145400">
+        <fileLocation href="./data/qf-models/s1a-wv1-hs-best-model-g20230101.ubj" locatorType="URL" />
+        <checksum checksumName="MD5">5903834ba18bc2ebd05e4530e73d245a</checksum>
+      </byteStream>
+    </dataObject>
+  </dataObjectSection>
+</xfdu:XFDU>
