@@ -9,7 +9,7 @@ instrument thanks to its quasi-linear properties, the wind-sea part presents mor
 and are only partially or totally removed from the SAR spectral signature. SAR-derived measurements are 
 therefore difficult to use given the partial and complex spectral coverage of the wind waves. Nevertheless, 
 some initiatives have shown the possibility to derive a more exhaustive description of the ocean state, 
-estimating the significant wave height, comparable to altimeters [4], [5], [6]. Yet, wind-sea component 
+estimating the significant wave height, comparable to altimeters ```[1], [2], [3]```. Yet, wind-sea component 
 impacts the SAR spectral measurements and some SAR-derived parameters such as the sea surface 
 wind, the azimuth cut-off and the wave age.
 Usually, with SAR observations, geophysical features retrieval applications are developed to make 
@@ -33,10 +33,25 @@ by WAVEWATCH III (WW3) over the period from July 2021 to August 2022. We used a 
 (DNN) to relate the input geophysical waves parameters derived from SAR observations and
 two targets :
 
-1- **Hs Wind Sea spectrum derived from WW3 spectrum** : we computed the integral value of the delineated wind sea spectrum.
+```
+1- Hs Wind Sea derived from delineated wind sea spectrum from W3 wave spectrum
+2- Phs0 : the Hs Wind Sea partition given by WW3
+```
 
-2- **Phs0** : the Hs Wind Sea partition given by WW3
+[1] Li, X. M., S. Lehner, and M. X. He. “Ocean Wave Measurements Based on Satellite Synthetic Aperture 
+Radar (SAR) and Numerical Wave Model (WAM) Data – Extreme Sea State and Cross Sea Analysis.” 
+International Journal of Remote Sensing 29, no. 21 (2008): 6403–16. 
+https://doi.org/10.1080/01431160802175546.
 
+[2] Pleskachevsky, Andrey, Sven Jacobsen, Björn Tings, and Egbert Schwarz. “Estimation of Sea State 
+from Sentinel-1 Synthetic Aperture Radar Imagery for Maritime Situation Awareness.” International 
+Journal of Remote Sensing 40, no. 11 (June 3, 2019): 4104–42.
+https://doi.org/10.1080/01431161.2018.1558377.
+
+[3] Quach, Brandon, Yannik Glaser, Justin Edward Stopa, Alexis Aurélien Mouche, and Peter Sadowski. 
+“Deep Learning for Predicting Significant Wave Height From Synthetic Aperture Radar.” IEEE 
+Transactions on Geoscience and Remote Sensing, 2020.
+doi: 10.1109/TGRS.2020.3003839
 
 Install of s1_hswind_predictor
 ==================
@@ -60,9 +75,13 @@ launch inference
 =================
 
 1- Refer to ```inference/cmdline.py``` to have a clear view of the needed arguments
+
 2- The algorithm request a file text that list the L2 OCN OSW products (netcdf files) to be inferred (required)
+
 3- The algorithm needed AUX_ML2 to load the models and the normalizers (can be defined in the config file or in the cmdline). The AUX_ML2 can be founded in : https://sar-mpc.eu/
+
 4- some other accessory arguments could be filled to define the format in which the results will be saved, ...
+
 /!\ the default configuration is available in config ```/inference/config.py```
 
 ```bash
