@@ -64,7 +64,7 @@ pip install -U setuptools
 pip install -e s1_hswind_predictor
 ```
 
-launch the test to test the installation
+Test installation
 ===================
 ```bash
 cd s1_hswind_predictor/test
