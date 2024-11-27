@@ -1,7 +1,0 @@
-{
-    "0":{
-        "l2_product":"\/home\/abenchaabane\/pyve\/env_infer_hswind_mpc\/src\/test\/referencedata\/s1a-wv1-ocn-vv-20231122t071316-20231122t071319-051326-063162-031.nc",
-        "pred_hswindsea_from_ww3_spec":1.914,
-        "pred_phs0_from_ww3_partitions":2.226
-    }
-}
