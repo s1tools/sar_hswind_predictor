@@ -15,6 +15,7 @@ with open('requirements.txt') as f:
 
 setup(
     name="s1_hswind_predictor",
+    python_requires=">=3.9",
     version=version,
     author="Amine Benchaabane",
     author_email="abenchaabane@groupcls.com",
@@ -22,7 +23,6 @@ setup(
     license="",
     url="https://gitlab.brest.cls.fr/abenchaabane/sar_hswind_predictor",
     packages=find_packages('src'),
-    package_dir={'': 'src'},
     install_requires=requirements,
     long_description=readme,
 )
