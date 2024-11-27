@@ -5,9 +5,6 @@ import json
 from inference.run_inference import get_inference
 from inference import config
 
-expected = {"hswindsea_from_ww3_spec": 1.914,
-            "phs0_from_ww3_partitions": 2.226}
-
 
 def test_hsWindsea_predictions_from_ocn_file():
     """
@@ -52,14 +49,14 @@ def test_hsWindsea_predictions_from_ocn_file():
                 expected_phs0 = ref_results['pred_phs0_from_ww3_partitions'][_kk]
                 break
 
-        # check for hsWindsea from ww3 wave spectum
+        # _____ check for hsWindsea from ww3 wave spectum
         assert np.allclose(infer_hsWind_spec, expected_hsWind_Spec,
                            atol=1e-02)
 
-        # check for hsWindSea from ww3 Hs wind partitions
+        # _____ check for hsWindSea from ww3 Hs wind partitions
         assert np.allclose(infer_psh0, expected_phs0,
                            atol=1e-02)
-    print('--' * 12, ' Tests inference for HsWindSea are OK', '--' * 12)
+    print('--' * 12, ' Tests for Hs Wind Sea inference are OK', '--' * 12)
 
 
 if __name__ == "__main__":
