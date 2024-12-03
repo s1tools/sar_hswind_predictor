@@ -4,12 +4,14 @@ import numpy as np
 import pandas as pd
 import json
 from json import loads
+
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 import tensorflow as tf
 
-from inference.cmdline import cmdline
-from inference import config
-from inference.cstm_logger import create_logger
-from inference.tools import get_sar_HsWind_featuresEng, apply_MinMax_scaler
+from hswind_inference.cmdline import cmdline
+from hswind_inference import config
+from hswind_inference.cstm_logger import create_logger
+from hswind_inference.tools import get_sar_HsWind_featuresEng, apply_MinMax_scaler
 
 
 def get_inference(list_l2_nc,
@@ -17,7 +19,7 @@ def get_inference(list_l2_nc,
                   outdir=config.filesystem.OUTPUT_FOLDER,
                   aux_ml2=config.filesystem.AUX_ML2,
                   verbosity=config.INFERENCE.VERBOSITY,
-                  no_log=True,
+                  log=False,
                   no_json=False,
                   export_result=False) -> None:
     """
@@ -28,7 +30,7 @@ def get_inference(list_l2_nc,
         outdir: the output workdir for potentilly export and save the resutls if needed
         aux_ml2: the AUX_ML2 data (con be founded in : https://sar-mpc.eu/)
         verbosity: the log verbosity
-        no_log: to create a log file or no
+        log: to log the execution
         no_json : to return the results in json format (default) or in csv (otherwise)
         export_result : to export or not the result
 
@@ -62,7 +64,6 @@ def get_inference(list_l2_nc,
         raise IOError(f'Error while reading the listing L2 product(s) : {exp}')
 
     # # ____ Initiate the logger if requested
-    log = not no_log
     if log:
         logdir = os.path.join(outdir, 'logs')
         os.makedirs(logdir, exist_ok=True)
@@ -103,21 +104,22 @@ def get_inference(list_l2_nc,
 
         targets_names = list(aux_ml2_data['wv1'].keys())
     except Exception as exp:
-        raise IOError(f'Error ({exp}) while reading AUX_ML2 files')
+        raise IOError(exp)
 
     try:
         for _mode in ['wv1', 'wv2']:
             _dict_mod = {}
             _dict_scl = {}
             for _targ in targets_names:
-                _dict_mod[_targ] = tf.keras.models.load_model(
-                    os.path.join(modelScalers_HsWind_path, aux_ml2_data[_mode][_targ]['h5']), compile=False)
+                _mod_path = os.path.join(modelScalers_HsWind_path, aux_ml2_data[_mode][_targ]['h5'])
+                _dict_mod[_targ] = tf.keras.models.load_model(_mod_path, compile=False)
+
                 with open(os.path.join(modelScalers_HsWind_path, aux_ml2_data[_mode][_targ]['scaler'])) as sf:
                     _dict_scl[_targ]: dict = json.load(sf)
             models.update({_mode: _dict_mod})
             scalers.update({_mode: _dict_scl})
     except Exception as exp:
-        raise IOError(f'Error ({exp}) to load models and scalers')
+        raise IOError(exp)
 
     # ____ For each target, we extract the features names.
     ordered_features = {}
