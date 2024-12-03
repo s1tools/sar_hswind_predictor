@@ -1,5 +1,5 @@
 import argparse
-from inference import config
+from hswind_inference import config
 
 
 def cmdline() -> argparse.ArgumentParser:
@@ -46,7 +46,7 @@ def cmdline() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
-        '--no_log',
+        '--log',
         help='To disable the main logging',
         action='store_true',
     )
