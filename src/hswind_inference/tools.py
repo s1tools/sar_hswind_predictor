@@ -164,6 +164,19 @@ def get_input_cwave_vector_from_ocn(cspc_re, cspc_im, kx, ky, incidenceangle, s0
     return subset_ok, S, flagKcorrupted
 
 
+def get_u_v_windcomponents(windspd: np.array, windir: np.array) -> None:
+    """
+    Aim : compute u and v wind components
+    :param : windspd : wind speed
+    :param : windir : wind direction
+    return : u and v
+    """
+
+    u = - windspd * np.sin(np.deg2rad(windir))
+    v = - windspd * np.cos(np.deg2rad(windir))
+    return u, v
+
+
 def get_sar_HsWind_featuresEng(l2_nc, imacs_names=list, time_sar=None, log=None):
     """
     Aim : Extract the necessary info from ocn osw porduct to preapre inference
@@ -197,12 +210,23 @@ def get_sar_HsWind_featuresEng(l2_nc, imacs_names=list, time_sar=None, log=None)
     _ds.loc[0, 'oswSnr'] = np.squeeze(l2_data['oswSnr'].values)
     _ds.loc[0, 'oswNv'] = np.squeeze(l2_data['oswNv'].values)
     _ds.loc[0, 'oswNrcs'] = np.squeeze(l2_data['oswNrcs'].values)
-    _ds['oswSnr_lin'] = _ds.apply(lambda x: 10 ** (x['oswSnr'] / 10), axis=1)
     _ds.loc[0, 'oswAzCutoff'] = np.squeeze(l2_data['oswAzCutoff'].values)
     _ds.loc[0, 'oswSkew'] = np.squeeze(l2_data['oswSkew'].values)
-    # _________CONVERT WINDIR CONVENTION
+
+    # _________CONVERT dB to LIN
+    _ds['oswSnr_lin'] = _ds.apply(lambda x: 10 ** (x['oswSnr'] / 10), axis=1)
+    _ds['oswNrcs_lin'] = _ds.apply(lambda x: 10 ** (x['oswNrcs'] / 10), axis=1)
+
+    # _________WIND DIR PROJECTION IN RANGE/AZIMUTH
     _ds['windir_sar_capt'] = _ds.apply(lambda x: windir2sensorGeo(x['oswWindDirection'],
-                                                                         x['oswHeading']), axis=1)
+                                                                  x['oswHeading']), axis=1)
+    _ds[['wind_sar_u', 'wind_sar_v']] = _ds.apply(lambda x: get_u_v_windcomponents(x['oswWindSpeed'],
+                                                                                   x['oswWindDirection']),
+                                                  axis=1,
+                                                  result_type='expand')
+    _ds['wind_dir_projected_range'] = _ds.apply(
+        lambda x: np.cos(np.deg2rad(x['oswHeading']) - np.arctan2(x['wind_sar_v'], x['wind_sar_u'])), axis=1)
+    _ds.drop(labels=['wind_sar_u', 'wind_sar_v'], axis=1, inplace=True)
 
     # __________ADD IMACS FEATURES
     ky_sar = np.squeeze(l2_data['oswKy'].values)
@@ -229,7 +253,7 @@ def get_sar_HsWind_featuresEng(l2_nc, imacs_names=list, time_sar=None, log=None)
 
     _, cwaves_vector, _ = get_input_cwave_vector_from_ocn(
         cspc_re=np.squeeze(l2_data['oswCartSpecRe'][..., 2].T),
-        cspc_im=abs(np.squeeze(l2_data['oswCartSpecIm'][..., 2].T)),
+        cspc_im=np.squeeze(l2_data['oswCartSpecIm'][..., 2].T),
         kx=oswKx_denorm,
         ky=oswKy_denorm,
         incidenceangle=np.squeeze(l2_data['oswIncidenceAngle'].values),
