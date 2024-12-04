@@ -21,7 +21,7 @@ setup(
     author_email="abenchaabane@groupcls.com",
     description=("Estimate Hs wind Sea from official ESA L2 OCN product with deep learning model"),
     license="",
-    url="https://github.com/s1tools/sar_hswind_predictor.git",
+    url="https://github.com/s1tools/sar_hswind_predictor",
     packages=find_packages('src'),
     package_dir={'': 'src'},
     install_requires=requirements,
