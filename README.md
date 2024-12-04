@@ -53,12 +53,35 @@ https://doi.org/10.1080/01431161.2018.1558377.
 Transactions on Geoscience and Remote Sensing, 2020.
 doi: 10.1109/TGRS.2020.3003839
 
+New Models Perfomances
+=====================
+**1- Hs wind Sea from delineated Wind sea spectrum**
+
+``For WV1``
+
+![perfo_scatter_view_wv1_swh_windsea_SpecMod_windww3.png](ressources%2Fperfo_scatter_view_wv1_swh_windsea_SpecMod_windww3.png)
+
+``For WV2``
+
+![perfo_scatter_view_wv2_swh_windsea_SpecMod_windww3.png](ressources%2Fperfo_scatter_view_wv2_swh_windsea_SpecMod_windww3.png))
+
+
+**2- Phs0**
+
+``For WV1``
+
+![perfo_scatter_view_wv1_ww3_part_param_phs0.png](ressources%2Fperfo_scatter_view_wv1_ww3_part_param_phs0.png)
+
+``For WV2``
+
+![perfo_scatter_view_wv2_ww3_part_param_phs0.png](ressources%2Fperfo_scatter_view_wv2_ww3_part_param_phs0.png)
+
 Install of s1_hswind_predictor
 ==================
 
 ```bash
 mkvirtualenv -p python3.9 $name_of_your_virtualenv
-git clone https://gitlab.brest.cls.fr/abenchaabane/sar_hswind_predictor.git
+git clone git@github.com:s1tools/sar_hswind_predictor.git
 git checkout develop
 pip install -U setuptools
 pip install -e s1_hswind_predictor
@@ -74,7 +97,7 @@ bin/python3.9 test_prediction.py
 launch inference
 =================
 
-1- Refer to ```inference/cmdline.py``` to have a clear view of the needed arguments
+1- Refer to ```hswind_inference/cmdline.py``` to have a clear view of the needed arguments
 
 2- The algorithm request a file text that list the L2 OCN OSW products (netcdf files) to be inferred (required)
 
@@ -82,7 +105,7 @@ launch inference
 
 4- some other accessory arguments could be filled to define the format in which the results will be saved, ...
 
-/!\ the default configuration is available in config ```/inference/config.py```
+/!\ the default configuration is available in config ```/hswind_inference/config.py```
 
 ```bash
 python run_inference.py --list_l2_nc path/to/file.txt
