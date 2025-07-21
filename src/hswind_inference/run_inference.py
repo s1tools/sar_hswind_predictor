@@ -53,15 +53,14 @@ def get_inference(list_l2_nc,
 
     # ____Process the list of OCN products
     try:
-        if not isinstance(list_l2_nc, list):
-            with open(list_l2_nc, "r") as file:
-                lines = file.readlines()
-                listing_l2_nc = [line.rstrip() for line in lines if line.strip() != ""]
-        else:
-            listing_l2_nc = list_l2_nc
-
-    except Exception as exp:
-        raise IOError(f'Error while reading the listing L2 product(s) : {exp}')
+        from netCDF4 import Dataset
+        bc = Dataset(list_l2_nc)
+        bc.close()
+        listing_l2_nc = [list_l2_nc]
+    except Exception:
+        with open(list_l2_nc, "r") as file:
+            lines = file.readlines()
+            listing_l2_nc = [line.rstrip() for line in lines if line.strip() != ""]
 
     # # ____ Initiate the logger if requested
     if log:
