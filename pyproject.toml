@@ -1,0 +1,71 @@
+[project]
+name = "s1_hswind_predictor"
+requires-python = ">= 3.9"
+license = {text = "MIT"}
+description = "Estimate Hs wind Sea from official ESA L2 OCN product with deep learning model"
+readme = "README.md"
+dependencies = [
+  "python-dateutil",
+  "tensorflow",
+  "dataclasses",
+  "netcdf4",
+  "numpy",
+]
+# to match ESA IPF restrictions, successful predictions have been tested with following versions
+# micromamba install numpy==1.19.5 xarray==2022.03 pandas==1.4.4 scipy==1.6.0 tensorflow==2.7.0
+keywords = [
+  "xarray",
+  "earth-observation",
+  "remote-sensing",
+  "satellite-imagery",
+  "sentinel1",
+  "sar",
+  "synthetic-aperture-radar",
+  "wave",
+  "hs",
+  "swh"
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering",
+]
+dynamic = ["version"]
+
+[project.urls]
+repository = "https://github.com/s1tools/s1_hswind_predictor"
+
+[build-system]
+requires = ["setuptools>=64.0", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["s1tools"]
+package-dir = {"" = "src"}
+
+[tool.setuptools_scm]
+fallback_version = "1.1.0"
+
+[tool.isort]
+profile = "black"
+skip_gitignore = true
+float_to_top = true
+default_section = "THIRDPARTY"
+known_first_party = "s1tools"
+
+[tool.black]
+line-length = 100
+
+[tool.coverage.run]
+source = ["s1tools"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = ["pragma: no cover", "if TYPE_CHECKING"]
