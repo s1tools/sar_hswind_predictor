@@ -1,7 +1,7 @@
 [project]
 name = "s1_hswind_predictor"
 requires-python = ">= 3.9"
-license = {text = "MIT"}
+license-files = ["LICENCE.txt"]
 description = "Estimate Hs wind Sea from official ESA L2 OCN product with deep learning model"
 readme = "README.md"
 dependencies = [
@@ -27,7 +27,6 @@ keywords = [
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
-  "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3 :: Only",
@@ -41,31 +40,6 @@ dynamic = ["version"]
 [project.urls]
 repository = "https://github.com/s1tools/s1_hswind_predictor"
 
-[build-system]
-requires = ["setuptools>=64.0", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
-
 [tool.setuptools]
-packages = ["s1tools"]
+packages = ["hswind_inference"]
 package-dir = {"" = "src"}
-
-[tool.setuptools_scm]
-fallback_version = "1.1.0"
-
-[tool.isort]
-profile = "black"
-skip_gitignore = true
-float_to_top = true
-default_section = "THIRDPARTY"
-known_first_party = "s1tools"
-
-[tool.black]
-line-length = 100
-
-[tool.coverage.run]
-source = ["s1tools"]
-branch = true
-
-[tool.coverage.report]
-show_missing = true
-exclude_lines = ["pragma: no cover", "if TYPE_CHECKING"]
